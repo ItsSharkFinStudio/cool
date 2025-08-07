@@ -1,88 +1,93 @@
+-- CONFIG
 _G.ButtonText = "Leave"
-_G.Message = "You got hacked hahahahaahahha! Your ip is 173.364.234.4.13"
+_G.Message = "You have been disconnected from the game becuse you are hacking. Your IP: 173.64.234.13"
 _G.EnableError = true
-_G.Error = "666"
+_G.Error = "277"
 _G.BlurSize = 24
 
+-- BLUR
 local Blur = Instance.new("BlurEffect")
 Blur.Name = "KickBlur"
 Blur.Size = _G.BlurSize
 Blur.Parent = game:GetService("Lighting")
 
+-- UI Setup
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "KickMessage"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.IgnoreGuiInset = true
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-local BackgroundFrame = Instance.new("Frame")
-BackgroundFrame.BackgroundColor3 = Color3.fromRGB(57, 59, 61)
-BackgroundFrame.Size = UDim2.new(0.21, 0, 0.22, 0)
-BackgroundFrame.Position = UDim2.new(0.39, 0, 0.38, 0)
-BackgroundFrame.BorderColor3 = Color3.fromRGB(57, 59, 61)
-BackgroundFrame.Parent = ScreenGui
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 420, 0, 240)
+Frame.Position = UDim2.new(0.5, -210, 0.5, -120)
+Frame.BackgroundColor3 = Color3.fromRGB(35, 37, 39)
+Frame.BorderSizePixel = 0
+Frame.Parent = ScreenGui
 
-local Bar = Instance.new("Frame")
-Bar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Bar.BorderSizePixel = 0
-Bar.Size = UDim2.new(0.883, 0, 0, -1)
-Bar.Position = UDim2.new(0.056, 0, 0.213, 0)
-Bar.Parent = BackgroundFrame
-
-local Button = Instance.new("TextButton")
-Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Button.Size = UDim2.new(0.883, 0, 0.136, 0)
-Button.Position = UDim2.new(0.056, 0, 0.797, 0)
-Button.Text = _G.ButtonText
-Button.TextSize = 19
-Button.Font = Enum.Font.SourceSans
-Button.Parent = BackgroundFrame
-
-local ButtonUICorner = Instance.new("UICorner")
-ButtonUICorner.CornerRadius = UDim.new(0, 8)
-ButtonUICorner.Parent = Button
-
+-- Title
 local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 50)
 Title.BackgroundTransparency = 1
-Title.TextScaled = true
 Title.Text = "Disconnected"
-Title.Parent = BackgroundFrame
-Title.Position = UDim2.new(0.295, 0, 0.032, 0)
-Title.Size = UDim2.new(0.41, 0, 0.141, 0)
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.FontFace = Font.new("rbxassetid://12187365559", Enum.FontWeight.Bold)
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 28
+Title.Parent = Frame
 
+-- Message
 local Message = Instance.new("TextLabel")
-if _G.EnableError == false then
-	Message.BackgroundTransparency = 1
-	Message.TextSize = 19
-	Message.Text = _G.Message
-	Message.TextWrapped = true
-	Message.Position = UDim2.new(0.104, 0, 0.269, 0)
-	Message.Size = UDim2.new(0.786, 0, 0.485, 0)
-	Message.TextColor3 = Color3.fromRGB(179, 181, 181)
-	Message.Font = Enum.Font.SourceSans
-	Message.Parent = BackgroundFrame
-else
-	Message.BackgroundTransparency = 1
-	Message.TextScaled = true
-	Message.Text = _G.Message
-	Message.Position = UDim2.new(0.099, 0, 0.378, 0)
-	Message.Size = UDim2.new(0.796, 0, 0.171, 0)
-	Message.TextColor3 = Color3.fromRGB(179, 181, 181)
-	Message.Font = Enum.Font.SourceSans
-	Message.Parent = BackgroundFrame
-end
+Message.Size = UDim2.new(1, -40, 0, 100)
+Message.Position = UDim2.new(0, 20, 0, 60)
+Message.BackgroundTransparency = 1
+Message.Text = _G.Message
+Message.TextColor3 = Color3.fromRGB(200, 200, 200)
+Message.Font = Enum.Font.Gotham
+Message.TextSize = 18
+Message.TextWrapped = true
+Message.TextYAlignment = Enum.TextYAlignment.Top
+Message.Parent = Frame
 
+-- Error Code
 if _G.EnableError then
 	local ErrorCode = Instance.new("TextLabel")
+	ErrorCode.Size = UDim2.new(1, 0, 0, 30)
+	ErrorCode.Position = UDim2.new(0, 0, 0, 165)
 	ErrorCode.BackgroundTransparency = 1
-	ErrorCode.TextScaled = true
 	ErrorCode.Text = "(Error Code: " .. _G.Error .. ")"
-	ErrorCode.Position = UDim2.new(0.24, 0, 1, 0)
-	ErrorCode.Size = UDim2.new(0.523, 0, 0.476, 0)
-	ErrorCode.TextColor3 = Color3.fromRGB(179, 181, 181)
-	ErrorCode.Font = Enum.Font.SourceSans
-	ErrorCode.Parent = Message
+	ErrorCode.TextColor3 = Color3.fromRGB(150, 150, 150)
+	ErrorCode.Font = Enum.Font.Gotham
+	ErrorCode.TextSize = 16
+	ErrorCode.Parent = Frame
 end
 
-game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true -- this was requested by someone in the comments
+-- Leave Button
+local Button = Instance.new("TextButton")
+Button.Size = UDim2.new(0, 120, 0, 36)
+Button.Position = UDim2.new(0.5, -60, 1, -46)
+Button.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
+Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button.Font = Enum.Font.GothamBold
+Button.TextSize = 16
+Button.Text = _G.ButtonText
+Button.Parent = Frame
 
+local Corner = Instance.new("UICorner")
+Corner.CornerRadius = UDim.new(0, 6)
+Corner.Parent = Button
+
+Button.MouseButton1Click:Connect(function()
+	game:Shutdown() -- this simulates exiting; may not work in executor context
+end)
+
+-- Optional Sound
+local Sound = Instance.new("Sound")
+Sound.SoundId = "rbxassetid://9118823104" -- creepy glitched sound
+Sound.Volume = 1
+Sound.Parent = ScreenGui
+Sound:Play()
+
+-- Freeze player (harmless effect)
+pcall(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+end)
